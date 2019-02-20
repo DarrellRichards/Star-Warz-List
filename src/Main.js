@@ -70,6 +70,7 @@ class Main extends React.Component {
               subContainerClassName={"pages pagination"}
               activeClassName={"active"}
             />
+           <p className="totalCount">Total Result Count: {this.props.count}</p>
           </section>
          </div>
         </div>
@@ -84,6 +85,7 @@ export default connect(
       fetched: store.starWars.fetched,
       people: store.starWars.people,
       pages: store.starWars.pages,
+      count: store.starWars.peopleCount,
       error: store.starWars.error
   })
 )(Main);

@@ -4,7 +4,8 @@ let startingState = {
     people: [],
     peopleCount: 0,
     pages: 0,
-    error: null
+    error: null,
+    person: null,
 }
 
 const reducer = (state = startingState, action) => {

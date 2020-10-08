@@ -3,7 +3,7 @@ import axios from 'axios';
 export const fetchPeople = () => {
  return (dispatch) => {
   dispatch({ type: 'START_FETCHING_PEOPLE' });
-  axios.get('https://swapi.co/api/people/')
+  axios.get('https://swapi.dev/api/people/')
    .then(results => {
     let pageCount = Math.floor(results.data.count / 10);
     dispatch({ type: 'FETCHING_PEOPLE_SUCCESS', people: results.data.results, peopleCount: results.data.count, pages: pageCount });
@@ -18,7 +18,7 @@ export const fetchPeople = () => {
 export const pageNextResult = (page) => {
  return (dispatch) => {
   dispatch({ type: 'START_SEARCHING_PEOPLE' });
-  axios.get(`https://swapi.co/api/people/?page=${page}`)
+  axios.get(`https://swapi.dev/api/people/?page=${page}`)
    .then(results => {
     if (results.data.count === 0) {
      dispatch({ type: 'FETCHING_PEOPLE_ERROR' });
@@ -37,7 +37,7 @@ export const pageNextResult = (page) => {
 export const searchPerson = (person) => {
  return (dispatch) => {
   dispatch({ type: 'START_SEARCHING_PEOPLE' });
-  axios.get(`https://swapi.co/api/people/?search=${person}`)
+  axios.get(`https://swapi.dev/api/people/?search=${person}`)
    .then(results => {
     if (results.data.count === 0) {
      dispatch({ type: 'FETCHING_PEOPLE_ERROR' });
@@ -51,4 +51,24 @@ export const searchPerson = (person) => {
     return err;
    })
  }
+}
+
+export const getPerson = (person) => {
+  return (dispatch) => {
+   dispatch({ type: 'START_SEARCHING_PEOPLE' });
+   axios.get(`https://swapi.dev/api/people/?search=${person}`)
+    .then(results => {
+      console.log(results);
+     if (results.data.count === 0) {
+      dispatch({ type: 'FETCHING_PEOPLE_ERROR' });
+     } else {
+      let pageCount = Math.floor(results.data.count / 10);
+      dispatch({ type: 'FETCHING_PEOPLE_SUCCESS', people: results.data.results, peopleCount: results.data.count, pages: pageCount });
+     }
+    })
+    .catch(err => {
+     dispatch({ type: 'FETCHING_PEOPLE_ERROR' });
+     return err;
+    })
+  }
 }

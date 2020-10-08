@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PersonIcon = (props) => {
  if (props.type == 1) {
@@ -51,7 +52,7 @@ const ListWars = (props) => {
          </div>
          <div className="level-item">
            <div>
-            <p className="heading">{person.name}</p>
+            <Link to={`person/${person.name}`}><p className="heading">{person.name}</p></Link>
             <p className="info"> HEIGHT: {person.height} &#9830; MASS: {person.mass} &#9830; GENDER: <span>{person.gender}</span> </p>
            </div>
          </div>
